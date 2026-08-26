@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FileMorph - Ultimate Image & Signature Compressor</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', system-ui, -apple-system, sans-serif; }
+        body {
+            background: #0f172a;
+            color: #f8fafc;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header / Navbar */
+        header {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .logo {
+            font-size: 22px;
+            font-weight: 800;
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+        }
+        nav { display: flex; gap: 25px; }
+        nav a { color: #94a3b8; text-decoration: none; font-size: 14px; font-weight: 500; transition: color 0.2s; }
+        nav a:hover { color: #818cf8; }
+
+        /* Main Content Wrapper */
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .container {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 35px;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 520px;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .brand h1 {
+            font-size: 26px;
+            font-weight: 800;
+            color: #fff;
+            margin-bottom: 6px;
+        }
+        .brand p { color: #94a3b8; font-size: 13px; margin-bottom: 25px; }
+        
+        .drop-zone {
+            border: 2px dashed rgba(129, 140, 248, 0.4);
+            background: rgba(15, 23, 42, 0.4);
+            padding: 30px 20px;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            margin-bottom: 20px;
+        }
+        .drop-zone:hover, .drop-zone.dragover {
+            border-color: #818cf8;
+            background: rgba(129, 140, 248, 0.08);
+        }
+        .drop-zone svg { width: 38px; height: 38px; stroke: #818cf8; margin-bottom: 10px; }
+        .drop-zone p { color: #cbd5e1; font-size: 13px; margin-bottom: 12px; }
+        
+        .btn-select {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 9px 20px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .btn-select:hover { background: #6366f1; }
+
+        .file-card {
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            display: none;
+            text-align: left;
+            align-items: center;
+            gap: 12px;
+        }
+        .file-card span { font-size: 13px; color: #e2e8f0; word-break: break-all; font-weight: 500; }
+
+        .options-group { margin-bottom: 20px; text-align: left; }
+        .options-group label { font-size: 12px; font-weight: 600; color: #94a3b8; display: block; margin-bottom: 6px; text-transform: uppercase; }
+        .options-group select {
+            width: 100%;
+            padding: 11px 14px;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #0f172a;
+            color: #fff;
+            font-size: 13px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .btn-compress {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            padding: 13px 20px;
+            border-radius: 12px;
+            font-size: 15px;
+            width: 100%;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+            transition: all 0.2s;
+        }
+        .btn-compress:hover { opacity: 0.95; transform: translateY(-1px); }
+        .btn-compress:disabled { background: #334155; color: #64748b; cursor: not-allowed; box-shadow: none; transform: none; }
+
+        /* SEO Content Section */
+        .seo-section {
+            max-width: 800px;
+            margin: 0 auto 60px;
+            padding: 0 20px;
+            text-align: left;
+        }
+        .seo-section h2 { font-size: 22px; color: #fff; margin-bottom: 15px; }
+        .seo-section p { color: #94a3b8; font-size: 14px; line-height: 1.6; margin-bottom: 15px; }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .feature-box {
+            background: rgba(30, 41, 59, 0.4);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 16px;
+        }
+        .feature-box h3 { font-size: 16px; color: #818cf8; margin-bottom: 8px; }
+        .feature-box p { font-size: 13px; color: #94a3b8; margin: 0; }
+
+        /* Footer */
+        footer {
+            background: #090d16;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 30px 40px;
+            text-align: center;
+            color: #64748b;
+            font-size: 13px;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+        .footer-links a { color: #94a3b8; text-decoration: none; transition: color 0.2s; }
+        .footer-links a:hover { color: #818cf8; }
+
+        /* Modal Popup */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px);
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s ease; z-index: 1000;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        .modal-card {
+            background: #1e293b; border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 35px; border-radius: 24px; width: 90%; max-width: 400px;
+            text-align: center; transform: scale(0.9); transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .modal-overlay.active .modal-card { transform: scale(1); }
+        .success-icon {
+            width: 56px; height: 56px; background: rgba(16, 185, 129, 0.15);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px; color: #10b981; font-size: 28px;
+        }
+        .modal-card h3 { font-size: 18px; font-weight: 700; color: #fff; margin-bottom: 6px; }
+        .modal-card p { color: #94a3b8; font-size: 13px; margin-bottom: 20px; }
+        .modal-btn {
+            background: #4f46e5; color: white; border: none; padding: 11px 20px;
+            border-radius: 10px; font-weight: 600; width: 100%; cursor: pointer;
+        }
+        .modal-btn:hover { background: #6366f1; }
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header>
+        <a href="#" class="logo">FileMorph</a>
+        <nav>
+            <a href="#">Home</a>
+            <a href="#">Image Compressor</a>
+            <a href="#">Signature Resizer</a>
+            <a href="#">About Us</a>
+        </nav>
+    </header>
+
+    <div class="main-wrapper">
+        <!-- Core Tool Container -->
+        <div class="container">
+            <div class="brand">
+                <h1>Image & Signature Resizer</h1>
+                <p>Compress JPG, PNG, WEBP to Exact KB Limits Instantly</p>
+            </div>
+            
+            <div id="dropZone" class="drop-zone">
+                <svg fill="none" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
+                <p>Drag & Drop your Image (JPG, PNG, JPEG, WEBP)</p>
+                <button type="button" class="btn-select" id="selectBtn">Browse Image</button>
+            </div>
+
+            <input type="file" id="fileInput" accept=".jpg,.jpeg,.png,.webp" style="display: none;">
+
+            <div id="fileCard" class="file-card">
+                <svg width="22" height="22" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                <span id="fileName">No file chosen</span>
+            </div>
+
+            <div class="options-group">
+                <label for="compressionLevel">Select Exact Target Size (KB Limits)</label>
+                <select id="compressionLevel">
+                    <option value="20kb">Under 20 KB (Perfect for Signatures)</option>
+                    <option value="50kb">Under 50 KB (Perfect for Passport Photos)</option>
+                    <option value="100kb">Under 100 KB</option>
+                    <option value="150kb">Under 150 KB</option>
+                    <option value="200kb" selected>Under 200 KB (Standard Form Limit)</option>
+                    <option value="250kb">Under 250 KB</option>
+                    <option value="300kb">Under 300 KB</option>
+                    <option value="350kb">Under 350 KB</option>
+                    <option value="400kb">Under 400 KB</option>
+                    <option value="450kb">Under 450 KB</option>
+                    <option value="500kb">Under 500 KB (Half MB)</option>
+                    <option value="750kb">Under 750 KB</option>
+                    <option value="1mb">Under 1 MB (1024 KB)</option>
+                    <option value="more">More than 1 MB (High Quality)</option>
+                </select>
+            </div>
+
+            <button class="btn-compress" id="compressBtn">COMPRESS IMAGE NOW</button>
+        </div>
+
+        <!-- SEO Content Section -->
+        <div class="seo-section">
+            <h2>Best Online Image & Signature Size Reducer for Exam Forms</h2>
+            <p>Filling out government exam forms like UPSC, SSC, Banking, or university admissions requires precise image sizing. FileMorph allows you to shrink heavy photos and signatures down to exact KB constraints (under 20 KB, 50 KB, 100 KB, etc.) without losing clarity, ensuring your uploads never get rejected due to size errors.</p>
+            
+            <div class="features-grid">
+                <div class="feature-box">
+                    <h3>Exact KB Precision</h3>
+                    <p>Advanced iterative compression targets precise byte boundaries smoothly.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>All Formats Supported</h3>
+                    <p>Compress PNG, JPG, JPEG, and WEBP image formats instantly.</p>
+                </div>
+                <div class="feature-box">
+                    <h3>100% Safe & Secure</h3>
+                    <p>Processed securely on your local node server with complete data privacy.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-links">
+            <a href="#">Privacy Policy</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Disclaimer</a>
+            <a href="#">Contact Us</a>
+        </div>
+        <p>&copy; 2026 FileMorph. All rights reserved.</p>
+    </footer>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal-overlay">
+        <div class="modal-card">
+            <div class="success-icon">✓</div>
+            <h3>Compression Successful!</h3>
+            <p id="modalSubText">Your optimized image has been successfully downloaded.</p>
+            <button class="modal-btn" id="modalCloseBtn">Awesome, Thanks!</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
