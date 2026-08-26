@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const formData = new FormData();
         formData.append('file', selectedFile);
-        formData.append('level', compressionLevel.value);
+        formData.append('target_size_kb', compressionLevel.value);
 
         alert("Step 2: Image Render Server par ja rahi hai... (Agar yahan atak gaya matlab Backend hang ho raha hai)"); // Test 2
 
