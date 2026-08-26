@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('fileInput');
     const fileCard = document.getElementById('fileCard');
     const fileNameDisplay = document.getElementById('fileName');
-    const customKbInput = document.getElementById('customKbInput'); // Naya Input Field
+    const customKbInput = document.getElementById('customKbInput');
     const compressBtn = document.getElementById('compressBtn');
 
     const successModal = document.getElementById('successModal');
@@ -22,15 +22,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    dropZone.addEventListener('dragover', (e) => {
-        e.preventDefault();
-        dropZone.classList.add('dragover');
-    });
-
-    dropZone.addEventListener('dragleave', () => {
-        dropZone.classList.remove('dragover');
-    });
-
+    dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+    dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('dragover'); });
     dropZone.addEventListener('drop', (e) => {
         e.preventDefault();
         dropZone.classList.remove('dragover');
@@ -42,24 +35,23 @@ document.addEventListener('DOMContentLoaded', () => {
     function handleFileSelection(file) {
         const validExts = ['image/png', 'image/jpeg', 'image/webp'];
         if (!validExts.includes(file.type) && !file.name.match(/\.(png|jpg|jpeg|webp)$/i)) {
-            alert('Please select a valid JPG/PNG file.');
+            alert('Please select a valid image (.jpg, .jpeg, .png, .webp)');
             return;
         }
         selectedFile = file;
-        fileNameDisplay.textContent = file.name;
+        fileNameDisplay.textContent = `${file.name} (${(file.size / 1024).toFixed(1)} KB)`;
         fileCard.style.display = 'flex';
     }
 
     compressBtn.addEventListener('click', async () => {
         if (!selectedFile) {
-            alert('Please select an image file first!');
+            alert('Pehle image select karein!');
             return;
         }
 
-        // Check if entered KB is between 1 and 250
         const targetSize = parseInt(customKbInput.value);
-        if (isNaN(targetSize) || targetSize < 1 || targetSize > 250) {
-            alert('Error: Please enter a valid size between 1 and 250 KB.');
+        if (isNaN(targetSize) || targetSize < 1 || targetSize > 300) {
+            alert('Please enter a target size between 1 and 300 KB.');
             return;
         }
 
@@ -68,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('target_size_kb', targetSize);
 
         const originalText = compressBtn.textContent;
-        compressBtn.textContent = 'Optimizing Image... Please Wait';
+        compressBtn.textContent = 'Compressing... Please Wait';
         compressBtn.disabled = true;
 
         try {
@@ -77,26 +69,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: formData
             });
 
-            if (!response.ok) {
-                throw new Error('Server compression failed.');
-            }
+            if (!response.ok) throw new Error('Compression failed.');
 
             const blob = await response.blob();
+            const outputKb = (blob.size / 1024).toFixed(1);
             const url = window.URL.createObjectURL(blob);
+            
             const a = document.createElement('a');
             a.href = url;
-            a.download = `compressed_${targetSize}kb_${selectedFile.name.replace(/\.[^/.]+$/, "")}.jpg`;
+            a.download = `compressed_${outputKb}kb_${selectedFile.name.replace(/\.[^/.]+$/, "")}.jpg`;
             document.body.appendChild(a);
             a.click();
             a.remove();
             window.URL.revokeObjectURL(url);
 
-            modalSubText.textContent = `Successfully resized your image to under ${targetSize} KB!`;
+            modalSubText.textContent = `Output size: ${outputKb} KB (Target: under ${targetSize} KB)`;
             successModal.classList.add('active');
 
         } catch (error) {
             console.error(error);
-            alert('Connection Error! Backend server might be waking up. Try again in 30 seconds.');
+            alert('Server waking up or connection issue. Please retry in 20-30 seconds.');
         } finally {
             compressBtn.textContent = originalText;
             compressBtn.disabled = false;
