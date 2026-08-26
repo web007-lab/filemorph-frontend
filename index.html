@@ -17,56 +17,26 @@
             flex-direction: column;
         }
 
-        /* Premium Header */
         header {
-            background: rgba(15, 23, 42, 0.7);
-            backdrop-filter: blur(16px);
+            background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(16px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            padding: 20px 50px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 100;
+            padding: 20px 50px; display: flex; justify-content: space-between;
+            align-items: center; position: sticky; top: 0; z-index: 100;
         }
-        .logo {
-            font-size: 24px;
-            font-weight: 800;
-            background: linear-gradient(135deg, #818cf8, #c084fc, #38bdf8);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            text-decoration: none;
-            letter-spacing: -0.5px;
-        }
+        .logo { font-size: 24px; font-weight: 800; background: linear-gradient(135deg, #818cf8, #c084fc, #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; letter-spacing: -0.5px; }
         nav { display: flex; gap: 30px; }
         nav a { color: #cbd5e1; text-decoration: none; font-size: 14px; font-weight: 500; transition: all 0.3s; }
         nav a:hover { color: #818cf8; text-shadow: 0 0 10px rgba(129, 140, 248, 0.4); }
 
-        /* Main Tool Container */
-        .main-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 60px 20px;
-        }
+        .main-wrapper { flex: 1; display: flex; flex-direction: column; align-items: center; padding: 60px 20px; }
 
         .container {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 28px;
+            background: rgba(30, 41, 59, 0.4); backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1); padding: 40px; border-radius: 28px;
             box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 rgba(255,255,255,0.1);
-            width: 100%;
-            max-width: 540px;
-            text-align: center;
-            margin-bottom: 60px;
-            position: relative;
+            width: 100%; max-width: 540px; text-align: center; margin-bottom: 60px; position: relative;
         }
         
-        /* Subtle Glow Behind Container */
         .container::before {
             content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px;
             background: linear-gradient(135deg, rgba(129,140,248,0.2), rgba(192,132,252,0.2));
@@ -77,71 +47,43 @@
         .brand p { color: #94a3b8; font-size: 14px; margin-bottom: 30px; }
         
         .drop-zone {
-            border: 2px dashed rgba(129, 140, 248, 0.3);
-            background: rgba(15, 23, 42, 0.6);
-            padding: 35px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 2px dashed rgba(129, 140, 248, 0.3); background: rgba(15, 23, 42, 0.6);
+            padding: 35px 20px; border-radius: 20px; cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             margin-bottom: 25px;
         }
-        .drop-zone:hover, .drop-zone.dragover {
-            border-color: #818cf8;
-            background: rgba(129, 140, 248, 0.05);
-            box-shadow: 0 0 20px rgba(129, 140, 248, 0.15);
-        }
+        .drop-zone:hover, .drop-zone.dragover { border-color: #818cf8; background: rgba(129, 140, 248, 0.05); box-shadow: 0 0 20px rgba(129, 140, 248, 0.15); }
         .drop-zone svg { width: 44px; height: 44px; stroke: #818cf8; margin-bottom: 12px; }
         .drop-zone p { color: #e2e8f0; font-size: 14px; margin-bottom: 15px; font-weight: 500; }
         
-        .btn-select {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 10px 24px;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
+        .btn-select { background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid rgba(255, 255, 255, 0.2); padding: 10px 24px; border-radius: 12px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
         .btn-select:hover { background: #818cf8; border-color: #818cf8; }
 
         .file-card {
             background: linear-gradient(135deg, rgba(16,185,129,0.1), rgba(5,150,105,0.1));
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            padding: 14px 18px;
-            border-radius: 14px;
-            margin-bottom: 25px;
-            display: none;
-            text-align: left;
-            align-items: center;
-            gap: 12px;
+            border: 1px solid rgba(16, 185, 129, 0.2); padding: 14px 18px; border-radius: 14px;
+            margin-bottom: 25px; display: none; text-align: left; align-items: center; gap: 12px;
         }
         .file-card span { font-size: 14px; color: #10b981; font-weight: 600; word-break: break-all; }
 
+        /* Custom Input Styling */
         .options-group { margin-bottom: 25px; text-align: left; }
         .options-group label { font-size: 12px; font-weight: 700; color: #94a3b8; display: block; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
-        .options-group select {
-            width: 100%; padding: 14px 16px; border-radius: 14px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            background: rgba(15, 23, 42, 0.8); color: #fff; font-size: 14px;
-            outline: none; cursor: pointer; transition: all 0.3s;
-            appearance: none;
+        .input-wrapper { display: flex; align-items: center; background: rgba(15, 23, 42, 0.8); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 14px; transition: all 0.3s; overflow: hidden; }
+        .input-wrapper:focus-within { border-color: #818cf8; box-shadow: 0 0 0 3px rgba(129,140,248,0.2); }
+        .input-wrapper input {
+            width: 100%; padding: 16px; background: transparent; border: none; color: #fff;
+            font-size: 18px; font-weight: 700; outline: none; text-align: center;
         }
-        .options-group select:focus { border-color: #818cf8; box-shadow: 0 0 0 3px rgba(129,140,248,0.2); }
+        .input-wrapper span { padding: 16px 20px; background: rgba(255,255,255,0.05); color: #cbd5e1; font-weight: 700; font-size: 14px; border-left: 1px solid rgba(255, 255, 255, 0.1); }
 
         .btn-compress {
-            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-            color: white; border: none; padding: 16px 20px;
-            border-radius: 16px; font-size: 16px; width: 100%;
-            font-weight: 700; cursor: pointer; letter-spacing: 0.5px;
-            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4);
-            transition: all 0.3s; text-transform: uppercase;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); color: white; border: none; padding: 16px 20px;
+            border-radius: 16px; font-size: 16px; width: 100%; font-weight: 700; cursor: pointer; letter-spacing: 0.5px;
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.4); transition: all 0.3s; text-transform: uppercase;
         }
         .btn-compress:hover { opacity: 0.95; transform: translateY(-2px); box-shadow: 0 15px 30px -5px rgba(99, 102, 241, 0.5); }
         .btn-compress:disabled { background: #334155; color: #94a3b8; cursor: not-allowed; box-shadow: none; transform: none; }
 
-        /* AdSense Content Sections (SEO & Policies) */
         .content-section { max-width: 900px; margin: 0 auto 60px; padding: 0 20px; text-align: left; }
         .content-section h2 { font-size: 26px; color: #fff; margin-bottom: 20px; letter-spacing: -0.5px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; }
         .content-section p { color: #94a3b8; font-size: 15px; line-height: 1.7; margin-bottom: 20px; }
@@ -152,20 +94,11 @@
         .feature-box h3 { font-size: 17px; color: #c084fc; margin-bottom: 10px; }
         .feature-box p { font-size: 14px; color: #94a3b8; margin: 0; }
 
-        .faq-box { margin-bottom: 20px; background: rgba(15,23,42,0.4); padding: 20px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.05); }
-        .faq-box h4 { color: #e2e8f0; font-size: 16px; margin-bottom: 8px; }
-
-        /* Footer */
         footer { background: #020617; border-top: 1px solid rgba(255, 255, 255, 0.05); padding: 40px 20px; text-align: center; color: #64748b; font-size: 14px; }
-        .footer-links { display: flex; justify-content: center; gap: 25px; margin-bottom: 20px; flex-wrap: wrap; }
-        .footer-links a { color: #94a3b8; text-decoration: none; transition: color 0.2s; font-weight: 500; }
-        .footer-links a:hover { color: #38bdf8; }
-
-        /* Success Modal */
+        
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); display: none; justify-content: center; align-items: center; z-index: 1000; }
         .modal-overlay.active { display: flex; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        
         .modal-card { background: linear-gradient(180deg, #1e293b, #0f172a); border: 1px solid rgba(129,140,248,0.3); padding: 40px; border-radius: 28px; width: 90%; max-width: 420px; text-align: center; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.8); }
         .success-icon { width: 64px; height: 64px; background: rgba(16, 185, 129, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; color: #10b981; font-size: 32px; border: 2px solid rgba(16,185,129,0.3); }
         .modal-card h3 { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 10px; }
@@ -181,22 +114,19 @@
         <nav>
             <a href="#">Tool</a>
             <a href="#how-it-works">How it Works</a>
-            <a href="#policies">Privacy</a>
         </nav>
     </header>
 
     <div class="main-wrapper">
-        
-        <!-- Core Tool Area (Do not change IDs) -->
         <div class="container">
             <div class="brand">
-                <h1>Image & Signature Resizer</h1>
-                <p>Compress JPG, PNG, WEBP to Exact KB Limits Instantly</p>
+                <h1>Exact Image Resizer</h1>
+                <p>Compress JPG, PNG to any custom KB limit (1 - 250 KB)</p>
             </div>
             
             <div id="dropZone" class="drop-zone">
                 <svg fill="none" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"/></svg>
-                <p>Drag & Drop your Image (JPG, PNG, WEBP)</p>
+                <p>Drag & Drop your Image (JPG, PNG)</p>
                 <button type="button" class="btn-select" id="selectBtn">Browse Image</button>
             </div>
 
@@ -208,72 +138,25 @@
             </div>
 
             <div class="options-group">
-                <label for="compressionLevel">Select Exact Target Size (KB Limits)</label>
-                <select id="compressionLevel">
-                    <option value="20">Under 20 KB (Signatures)</option>
-                    <option value="50">Under 50 KB (Passport Photos)</option>
-                    <option value="100">Under 100 KB</option>
-                    <option value="150">Under 150 KB</option>
-                    <option value="200" selected>Under 200 KB (Standard Form Limit)</option>
-                    <option value="250">Under 250 KB</option>
-                    <option value="300">Under 300 KB</option>
-                    <option value="500">Under 500 KB (Half MB)</option>
-                    <option value="1024">Under 1 MB (1024 KB)</option>
-                </select>
+                <label for="customKbInput">Enter Required Size (1 to 250 KB)</label>
+                <div class="input-wrapper">
+                    <!-- Yaha Dropdown ki jagah Number Input lagaya hai -->
+                    <input type="number" id="customKbInput" min="1" max="250" value="50" placeholder="E.g., 50">
+                    <span>KB Limit</span>
+                </div>
             </div>
 
             <button class="btn-compress" id="compressBtn">COMPRESS IMAGE NOW</button>
         </div>
 
-        <!-- AdSense Required Content: SEO, Features, FAQs -->
         <div id="how-it-works" class="content-section">
-            <h2>Best Online Image Reducer for Exam Forms</h2>
-            <p>Filling out government exam forms like UPSC, SSC, Banking, or university admissions requires precise image sizing. FileMorph allows you to shrink heavy photos and signatures down to exact KB constraints (under 20 KB, 50 KB, 100 KB, etc.) without losing clarity. Our smart compression algorithm ensures your uploads never get rejected due to size errors.</p>
-            
-            <div class="features-grid">
-                <div class="feature-box">
-                    <h3>🎯 Exact KB Precision</h3>
-                    <p>Advanced iterative compression targets precise byte boundaries smoothly without pixelating your crucial documents.</p>
-                </div>
-                <div class="feature-box">
-                    <h3>⚡ All Formats Supported</h3>
-                    <p>Whether you have a PNG, JPG, JPEG, or WEBP, our tool processes all major web image formats instantly.</p>
-                </div>
-                <div class="feature-box">
-                    <h3>🔒 100% Safe & Secure</h3>
-                    <p>Your privacy is paramount. Images are processed securely and deleted automatically. We do not store your personal photos.</p>
-                </div>
-            </div>
-
-            <h2>Frequently Asked Questions</h2>
-            <div class="faq-box">
-                <h4>How do I compress a signature to under 20KB?</h4>
-                <p>Simply upload your scanned signature, select "Under 20 KB" from the dropdown menu, and click Compress. The tool will automatically adjust the quality to meet the exact size limit.</p>
-            </div>
-            <div class="faq-box">
-                <h4>Are my passport photos saved on your servers?</h4>
-                <p>No. We operate a strict zero-retention policy. Your files are processed temporarily in memory to generate the download and are instantly discarded afterward.</p>
-            </div>
-        </div>
-
-        <!-- AdSense Required Content: Policies -->
-        <div id="policies" class="content-section" style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 40px;">
-            <h2>Legal & Policies</h2>
-            <p><strong>Privacy Policy:</strong> At FileMorph (filemorph.online), the privacy of our visitors is of extreme importance to us. We do not collect, store, or share any images uploaded to our servers. Processing happens on-the-fly. We may use third-party advertising companies (like Google AdSense) to serve ads, which may use cookies to serve ads based on your prior visits.</p>
-            <p><strong>Terms of Service:</strong> By accessing this website, you agree to be bound by these Terms of Use. FileMorph provides image compression as a free utility "as is". We are not liable for any form rejections by third-party portals. Do not use this tool for illegal purposes.</p>
-           
+            <h2>Best Custom Image Resizer for Forms</h2>
+            <p>Filling out government exam forms requires precise image sizing. Enter any custom size between 1KB to 250KB and our smart algorithm will give you an image just under your required limit.</p>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer>
-        <div class="footer-links">
-            <a href="#policies">Privacy Policy</a>
-            <a href="#policies">Terms of Service</a>
-            <a href="#policies">Disclaimer</a>
-            <a href="#policies">Contact Us</a>
-        </div>
-        <p>&copy; 2026 FileMorph. Developed to make form-filling easier. All rights reserved.</p>
+        <p>&copy; 2026 FileMorph. Developed to make form-filling easier.</p>
     </footer>
 
     <!-- Success Modal -->
@@ -281,7 +164,7 @@
         <div class="modal-card">
             <div class="success-icon">✓</div>
             <h3>Compression Complete!</h3>
-            <p id="modalSubText">Your optimized image has been successfully downloaded to your device.</p>
+            <p id="modalSubText">Your optimized image has been successfully downloaded.</p>
             <button class="modal-btn" id="modalCloseBtn">Awesome, Thanks!</button>
         </div>
     </div>
